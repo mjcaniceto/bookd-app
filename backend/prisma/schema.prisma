@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Camera {
+  id           String    @id
+  name         String
+  tagline      String
+  pricePerDay  Float     @map("price_per_day")
+  rating       Float     @default(5.0)
+  rentals      Int       @default(0)
+  accent       String
+  images       String[]
+  specs        Json
+  inclusions   String[]
+  bookedDates  String[]  @map("booked_dates")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@map("cameras")
+}
